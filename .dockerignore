@@ -1,0 +1,63 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+*.md
+!README.md
+
+# Test files
+*_test.go
+test_*.py
+*.test.js
+*.spec.js
+*.test.ts
+*.spec.ts
+
+# Output directories
+output/
+*.log
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Build artifacts
+dist/
+build/
+.next/
+out/
+
+# Coverage reports
+coverage/
+*.coverage
+htmlcov/
+
+# Temporary files
+tmp/
+temp/

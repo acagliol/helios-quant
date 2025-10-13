@@ -1,11 +1,15 @@
 # 🧮 Helios Quant Framework
 
-**A multi-language quantitative analytics and AI forecasting engine for private equity and investment analysis**
+**A production-grade, multi-language quantitative analytics platform for institutional finance**
 
 [![Go](https://img.shields.io/badge/Go-1.21-00ADD8?logo=go)](https://go.dev/)
-[![R](https://img.shields.io/badge/R-4.3-276DC3?logo=r)](https://www.r-project.org/)
 [![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python)](https://www.python.org/)
+[![R](https://img.shields.io/badge/R-4.3-276DC3?logo=r)](https://www.r-project.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-336791?logo=postgresql)](https://www.postgresql.org/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker)](https://www.docker.com/)
+
+> 🚀 **Currently under active development** | [Roadmap](IMPLEMENTATION_ROADMAP.md) | [Next Steps](NEXT_STEPS.md)
 
 ---
 

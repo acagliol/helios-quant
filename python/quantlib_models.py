@@ -33,16 +33,36 @@ class QuantLibFinanceCalculator:
         dates = [ql.Date(cf[0].day, cf[0].month, cf[0].year) for cf in cash_flows]
         amounts = [cf[1] for cf in cash_flows]
 
-        # Calculate IRR
+        # Calculate IRR using NPV solver
         try:
-            irr = ql.CashFlows.irr(
-                [ql.SimpleCashFlow(amt, date) for amt, date in zip(amounts, dates)],
-                self.day_count,
-                ql.Compounded,
-                ql.Annual
-            )
-            return irr
-        except RuntimeError:
+            # Simple IRR calculation
+            cash_flow_leg = [ql.SimpleCashFlow(amt, date) for amt, date in zip(amounts, dates)]
+
+            # Use Newton's method to find IRR
+            def npv_function(rate):
+                settlement = dates[0]
+                npv = 0.0
+                for cf, date in zip(cash_flow_leg, dates):
+                    years = self.day_count.yearFraction(settlement, date)
+                    npv += cf.amount() / ((1 + rate) ** years)
+                return npv
+
+            # Newton-Raphson method
+            rate_guess = 0.1
+            for _ in range(100):
+                npv = npv_function(rate_guess)
+                if abs(npv) < 0.01:
+                    break
+                # Numerical derivative
+                delta = 0.0001
+                npv_delta = npv_function(rate_guess + delta)
+                derivative = (npv_delta - npv) / delta
+                if abs(derivative) < 1e-10:
+                    break
+                rate_guess = rate_guess - npv / derivative
+
+            return rate_guess
+        except Exception:
             return np.nan
 
     def calculate_npv(self, cash_flows: List[Tuple[datetime, float]], discount_rate: float) -> float:
