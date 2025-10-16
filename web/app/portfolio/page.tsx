@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import {
   Plus,
   Trash2,
@@ -91,7 +92,6 @@ export default function PortfolioManagement() {
 
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState<Fund | null>(null);
-  const [showAddModal, setShowAddModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterSector, setFilterSector] = useState('All');
   const [sortField, setSortField] = useState<keyof Fund>('fund_name');
@@ -139,7 +139,6 @@ export default function PortfolioManagement() {
       status: 'Active'
     };
     setFunds([...funds, newFund]);
-    setShowAddModal(false);
     setEditingId(newFund.id);
     setEditForm(newFund);
   };
@@ -157,10 +156,10 @@ export default function PortfolioManagement() {
   const handleImportCSV = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      Papa.parse(file, {
+      Papa.parse<Record<string, string>>(file, {
         header: true,
         complete: (results) => {
-          const importedFunds = results.data.map((row: any, index: number) => ({
+          const importedFunds = results.data.map((row, index) => ({
             id: (Date.now() + index).toString(),
             fund_name: row.fund_name || '',
             vintage: parseInt(row.vintage) || new Date().getFullYear(),
@@ -236,9 +235,9 @@ export default function PortfolioManagement() {
                 <p className="text-sm text-slate-400">Manage your investment funds</p>
               </div>
             </div>
-            <a href="/" className="text-sm text-slate-400 hover:text-white transition-colors">
+            <Link href="/" className="text-sm text-slate-400 hover:text-white transition-colors">
               ← Back to Dashboard
-            </a>
+            </Link>
           </div>
         </div>
       </header>

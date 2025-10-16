@@ -3,10 +3,12 @@
 ## 🚀 Quick Start (5 Minutes)
 
 ### Prerequisites
-- **Docker** & **Docker Compose** (recommended)
-- OR manually install: Go 1.21+, Node.js 20+, Python 3.11+, PostgreSQL 15+, Redis 7+
+- **Native Setup (Recommended)**: Go 1.21+, Node.js 20+, Python 3.11+
+- OR **Docker** & **Docker Compose** (uses more disk space)
 
-### Option 1: Docker Compose (Recommended)
+### Option 1: Native Setup (Recommended - Lightweight!)
+
+**Why Native?** Uses ~500MB instead of ~5GB+ with Docker. Faster startup times.
 
 1. **Clone the repository**
    ```bash
@@ -14,48 +16,58 @@
    cd helios-quant-framework
    ```
 
-2. **Copy environment variables**
+2. **Run the setup script**
+   ```bash
+   chmod +x scripts/setup-native.sh
+   ./scripts/setup-native.sh
+   ```
+   This will:
+   - Install PostgreSQL and Redis
+   - Create the database and user
+   - Load the schema
+
+3. **Copy environment variables**
    ```bash
    cp .env.example .env
    # Edit .env to add your API keys (optional for basic functionality)
    ```
 
-3. **Start all services**
+4. **Install application dependencies**
    ```bash
-   docker-compose up -d
+   # Frontend
+   cd web && npm install && cd ..
+
+   # Go backend
+   cd go && go mod download && cd ..
+
+   # Python (optional)
+   cd python && pip install -r requirements.txt && cd ..
    ```
 
-4. **Wait for services to be healthy** (~30 seconds)
+5. **Start all services**
    ```bash
-   docker-compose ps
+   ./scripts/start-dev.sh
    ```
 
-5. **Access the application**
+6. **Access the application**
    - **Frontend**: http://localhost:3000
    - **API**: http://localhost:8080
    - **API Health**: http://localhost:8080/api/v1/health
-   - **Grafana**: http://localhost:3001 (admin/admin)
-   - **Prometheus**: http://localhost:9090
 
-6. **View logs**
+7. **View logs**
    ```bash
-   docker-compose logs -f api
-   docker-compose logs -f web
+   tail -f logs/api.log
+   tail -f logs/web.log
    ```
 
-7. **Stop services**
+8. **Stop services**
    ```bash
-   docker-compose down
-   ```
-
-8. **Stop and remove all data**
-   ```bash
-   docker-compose down -v
+   ./scripts/stop-dev.sh
    ```
 
 ---
 
-### Option 2: Manual Setup
+### Option 2: Docker Setup (Uses more disk space)
 
 #### Step 1: Install Dependencies
 

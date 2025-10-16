@@ -12,8 +12,6 @@ import {
   Play
 } from 'lucide-react';
 import {
-  LineChart,
-  Line,
   BarChart,
   Bar,
   PieChart as RechartsPie,
@@ -36,21 +34,11 @@ interface SimulationResult {
   iterations: number;
 }
 
-interface PortfolioData {
-  fund_id: number;
-  vintage: number;
-  sector: string;
-  committed_capital: number;
-  irr: number;
-  benchmark_return: number;
-  volatility: number;
-}
 
 const COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
 
 export default function Dashboard() {
   const [simulationData, setSimulationData] = useState<SimulationResult | null>(null);
-  const [portfolioData, setPortfolioData] = useState<PortfolioData[]>([]);
   const [loading, setLoading] = useState(false);
   const [apiStatus, setApiStatus] = useState<'checking' | 'online' | 'offline'>('checking');
 
@@ -68,7 +56,7 @@ export default function Dashboard() {
       } else {
         setApiStatus('offline');
       }
-    } catch (error) {
+    } catch {
       setApiStatus('offline');
     }
   };
@@ -296,7 +284,7 @@ export default function Dashboard() {
           {!simulationData && !loading && (
             <div className="text-center py-12 text-slate-400">
               <Activity className="w-12 h-12 mx-auto mb-3 opacity-50" />
-              <p>Click "Run Simulation" to see results</p>
+              <p>Click &quot;Run Simulation&quot; to see results</p>
             </div>
           )}
         </div>
@@ -316,7 +304,10 @@ export default function Dashboard() {
                   cx="50%"
                   cy="50%"
                   labelLine={false}
-                  label={({ sector, irr }) => `${sector}: ${(irr * 100).toFixed(1)}%`}
+                  label={(props) => {
+                    const data = props as unknown as { sector: string; irr: number };
+                    return `${data.sector}: ${(data.irr * 100).toFixed(1)}%`;
+                  }}
                   outerRadius={100}
                   fill="#8884d8"
                   dataKey="irr"
