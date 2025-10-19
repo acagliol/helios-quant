@@ -69,7 +69,7 @@ echo ""
 # Start Go API in background
 echo -e "${YELLOW}  Starting Go API on port 8080...${NC}"
 cd go
-go run main.go > ../logs/api.log 2>&1 &
+PORT=8080 go run main.go > ../logs/api.log 2>&1 &
 API_PID=$!
 echo $API_PID > ../logs/api.pid
 cd ..
@@ -79,10 +79,10 @@ echo -e "${GREEN}  ✅ API started (PID: $API_PID)${NC}"
 echo -e "${YELLOW}  Waiting for API to be ready...${NC}"
 sleep 3
 
-# Start Next.js frontend in background
+# Start Next.js frontend in background (explicitly set port 3000)
 echo -e "${YELLOW}  Starting Next.js frontend on port 3000...${NC}"
 cd web
-npm run dev > ../logs/web.log 2>&1 &
+PORT=3000 npm run dev > ../logs/web.log 2>&1 &
 WEB_PID=$!
 echo $WEB_PID > ../logs/web.pid
 cd ..

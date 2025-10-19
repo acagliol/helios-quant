@@ -412,26 +412,72 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Tech Stack Info */}
-        <div className="mt-8 bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700">
-          <h3 className="text-lg font-bold text-white mb-4">Technology Stack</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-slate-900/50 rounded-lg p-4 border border-slate-700">
-              <p className="text-blue-400 font-semibold mb-1">Go</p>
-              <p className="text-xs text-slate-400">Backend API & Monte Carlo</p>
+        {/* Quantitative Tools */}
+        <div className="mt-8 space-y-6">
+          {/* Option Pricing */}
+          <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700">
+            <h3 className="text-lg font-bold text-white mb-4">Option Pricing Models</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <a href="/options" className="group bg-slate-900/50 rounded-lg p-6 border border-slate-700 hover:border-blue-500 transition-all cursor-pointer">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center group-hover:bg-blue-500/30 transition-all">
+                    <Activity className="w-5 h-5 text-blue-400" />
+                  </div>
+                  <h4 className="text-white font-semibold">Black-Scholes</h4>
+                </div>
+                <p className="text-sm text-slate-400">European options with full Greeks (Δ, Γ, ν, Θ, ρ)</p>
+              </a>
+
+              <a href="/options/heston" className="group bg-slate-900/50 rounded-lg p-6 border border-slate-700 hover:border-purple-500 transition-all cursor-pointer">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center group-hover:bg-purple-500/30 transition-all">
+                    <TrendingUp className="w-5 h-5 text-purple-400" />
+                  </div>
+                  <h4 className="text-white font-semibold">Heston Model</h4>
+                </div>
+                <p className="text-sm text-slate-400">Stochastic volatility with vol smile</p>
+              </a>
+
+              <a href="/options/exotic" className="group bg-slate-900/50 rounded-lg p-6 border border-slate-700 hover:border-yellow-500 transition-all cursor-pointer">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 bg-yellow-500/20 rounded-lg flex items-center justify-center group-hover:bg-yellow-500/30 transition-all">
+                    <LineChartIcon className="w-5 h-5 text-yellow-400" />
+                  </div>
+                  <h4 className="text-white font-semibold">Exotic Options</h4>
+                </div>
+                <p className="text-sm text-slate-400">Asian, Barrier, Lookback & Digital</p>
+              </a>
+
+              <a href="/options/monte-carlo" className="group bg-slate-900/50 rounded-lg p-6 border border-slate-700 hover:border-green-500 transition-all cursor-pointer">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center group-hover:bg-green-500/30 transition-all">
+                    <RefreshCw className="w-5 h-5 text-green-400" />
+                  </div>
+                  <h4 className="text-white font-semibold">Monte Carlo</h4>
+                </div>
+                <p className="text-sm text-slate-400">High-performance MC with variance reduction</p>
+              </a>
             </div>
-            <div className="bg-slate-900/50 rounded-lg p-4 border border-slate-700">
-              <p className="text-green-400 font-semibold mb-1">R</p>
-              <p className="text-xs text-slate-400">Statistical Analysis</p>
-            </div>
-            <div className="bg-slate-900/50 rounded-lg p-4 border border-slate-700">
-              <p className="text-yellow-400 font-semibold mb-1">Python</p>
-              <p className="text-xs text-slate-400">ML & QuantLib</p>
-            </div>
-            <div className="bg-slate-900/50 rounded-lg p-4 border border-slate-700">
-              <p className="text-purple-400 font-semibold mb-1">Next.js</p>
-              <p className="text-xs text-slate-400">Web Dashboard</p>
-            </div>
+          </div>
+
+          {/* Portfolio Optimization */}
+          <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700">
+            <h3 className="text-lg font-bold text-white mb-4">Portfolio Optimization</h3>
+            <a href="/portfolio/optimize" className="group block bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-lg p-6 border border-blue-500/30 hover:border-blue-400 transition-all cursor-pointer">
+              <div className="flex items-center gap-4 mb-3">
+                <div className="w-12 h-12 bg-blue-500/30 rounded-lg flex items-center justify-center group-hover:bg-blue-500/40 transition-all">
+                  <PieChart className="w-6 h-6 text-blue-300" />
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold text-lg">Modern Portfolio Theory</h4>
+                  <p className="text-sm text-slate-300">Markowitz, Risk Parity & CVaR Optimization</p>
+                </div>
+              </div>
+              <p className="text-sm text-slate-400">
+                Optimize portfolio allocation using mean-variance optimization, risk parity (equal risk contribution),
+                and CVaR minimization for tail risk management. Compare strategies and visualize efficient frontiers.
+              </p>
+            </a>
           </div>
         </div>
       </div>
