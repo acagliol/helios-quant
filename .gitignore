@@ -82,3 +82,8 @@ logs/
 # Temporary files
 tmp/
 temp/
+
+# Documentation
+ELITE_ROADMAP.md
+*ROADMAP*.md
+*RESUME*.md
