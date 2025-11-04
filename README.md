@@ -1,51 +1,44 @@
-# 🧮 Helios Quant Framework
+# Helios Quant
 
-**Python-based quantitative research platform for options pricing and Monte Carlo simulation**
+Python-based quantitative research platform for options pricing and Monte Carlo simulation.
 
 [![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python)](https://www.python.org/)
-[![NumPy](https://img.shields.io/badge/NumPy-1.24-013243?logo=numpy)](https://numpy.org/)
-[![Pytest](https://img.shields.io/badge/Pytest-7.4-0A9EDC?logo=pytest)](https://pytest.org/)
-
----
 
 ## Features
 
-- **Options Pricing**: Black-Scholes, Heston stochastic volatility, Merton jump-diffusion, exotic options
-- **Analytical Greeks**: Delta, gamma, vega, theta, rho calculated analytically
-- **Monte Carlo**: 1M paths in ~18ms with variance reduction (antithetic variates, Sobol sequences)
-- **Validation**: 60+ test cases covering edge cases and put-call parity
-- **Dashboard**: Next.js/TypeScript interactive pricing interface
+- **Options Pricing** – Black-Scholes, Heston, Merton jump-diffusion, exotic options
+- **Greeks** – Analytical delta, gamma, vega, theta, rho
+- **Monte Carlo** – Vectorized engine with variance reduction techniques
+- **Testing** – 60+ test cases with put-call parity validation
 
 ## Quick Start
 
 ```bash
-# Install dependencies
+# Install
 pip install -r requirements.txt
 
-# Run tests
+# Test
 pytest pricing/options/tests/ -v
-
-# Try it out
-python
->>> from pricing.options.black_scholes import BlackScholes
->>> bs = BlackScholes(S=100, K=100, T=1.0, r=0.05, sigma=0.2)
->>> print(f"Price: ${bs.price():.2f}, Delta: {bs.delta():.4f}")
 ```
 
-## Usage Example
+## Usage
 
 ```python
 from pricing.options.black_scholes import BlackScholes
+
+# Price a call option
+option = BlackScholes(S=100, K=105, T=1.0, r=0.05, sigma=0.25, option_type='call')
+print(f"Price: ${option.price():.2f}")
+print(f"Delta: {option.delta():.4f}")
+```
+
+```python
 from pricing.monte_carlo.engine import MonteCarloEngine
 
-# Price European call with Black-Scholes
-call = BlackScholes(S=100, K=105, T=1.0, r=0.05, sigma=0.25, option_type='call')
-print(f"Call: ${call.price():.2f}, Delta: {call.delta():.4f}")
-
-# Monte Carlo with variance reduction
+# Monte Carlo pricing with variance reduction
 mc = MonteCarloEngine(n_paths=1_000_000, variance_reduction='antithetic')
-mc_price = mc.price_european_option(S0=100, K=100, T=1.0, r=0.05, sigma=0.2)
-print(f"MC Price: ${mc_price:.2f}")
+price = mc.price_european_option(S0=100, K=100, T=1.0, r=0.05, sigma=0.2)
+print(f"Price: ${price:.2f}")
 ```
 
 ## Project Structure
@@ -53,41 +46,21 @@ print(f"MC Price: ${mc_price:.2f}")
 ```
 pricing/
 ├── options/
-│   ├── black_scholes.py    # Black-Scholes with Greeks
-│   ├── heston.py           # Stochastic volatility
-│   ├── merton_jump.py      # Jump-diffusion
-│   ├── exotics.py          # Asian, barrier, lookback
-│   └── tests/              # 60+ test cases
+│   ├── black_scholes.py
+│   ├── heston.py
+│   ├── merton_jump.py
+│   ├── exotics.py
+│   └── tests/
 └── monte_carlo/
-    └── engine.py           # Vectorized MC engine
+    └── engine.py
 ```
 
 ## Tech Stack
 
-**Core**: Python 3.11, NumPy, SciPy, pandas  
-**Pricing**: Black-Scholes, Heston, Merton, exotic options  
-**Testing**: pytest with 60+ test cases  
-**Frontend**: Next.js, TypeScript, Tailwind CSS  
-**Database**: PostgreSQL
+- **Backend**: Python 3.11, NumPy, SciPy, pandas
+- **Testing**: pytest
+- **Frontend**: Next.js, TypeScript, Tailwind CSS
 
-## Documentation
+## License
 
-- [MONTH_01_FOUNDATION.md](MONTH_01_FOUNDATION.md) - Implementation details
-- [ELITE_ROADMAP.md](ELITE_ROADMAP.md) - Development roadmap
-
-## Related Project
-
-**[ArbitraX](../arbitrax/)** - Trading infrastructure with Go order book and matching engine
-
----
-
-## Resume Summary
-
-**Helios Quantitative Research Platform | Python, NumPy, SciPy, Next.js**
-
-*Developed options pricing library implementing Black-Scholes with analytical Greeks (Δ, Γ, ν, Θ, ρ), Heston stochastic volatility using characteristic function integration, Merton jump-diffusion with series expansion, and exotic options (Asian, barrier, lookback, digital) - validated with 60+ test cases covering edge cases and put-call parity. Built high-performance Monte Carlo engine achieving 1M simulation paths in ~18ms using fully vectorized NumPy operations; implemented variance reduction techniques (antithetic variates with 3.2x variance reduction, Sobol quasi-random sequences).*
-
----
-
-**License**: MIT  
-*Built with Python, NumPy, and quantitative rigor 🚀📊*
+MIT
